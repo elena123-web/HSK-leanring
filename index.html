@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f7f2">
+  <title>汉语小屋 — Góc học tiếng Trung</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700&display=swap');
+    :root{--ink:#202a27;--muted:#75817b;--green:#226c55;--green-dark:#194f40;--mint:#e8f2eb;--paper:#fbfcf9;--line:#e7ebe5;--coral:#f1a181;--yellow:#f7d983;--shadow:0 12px 40px #25372a0c}
+    *{box-sizing:border-box}body{margin:0;background:#f6f7f2;color:var(--ink);font:15px 'DM Sans',sans-serif}button,input,select{font:inherit}button{cursor:pointer}.han{font-family:'Noto Sans SC',sans-serif}.shell{max-width:1180px;margin:auto;padding:0 34px 60px}.topbar{height:86px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}.brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:-.4px}.brand-mark{width:42px;height:42px;background:var(--green);color:white;border-radius:14px;display:grid;place-items:center;font-size:23px}.brand small{display:block;color:var(--muted);font-size:11px;font-weight:500;letter-spacing:.1px;margin-top:3px}.streak{background:white;border:1px solid var(--line);border-radius:999px;padding:9px 14px;color:#966d19;font-size:13px;font-weight:700}.hero{padding:42px 0 30px;display:flex;align-items:flex-end;justify-content:space-between;gap:30px}.eyebrow{color:var(--green);font-size:11px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase}.hero h1{font-size:clamp(30px,4vw,47px);letter-spacing:-2px;line-height:1.1;margin:10px 0 11px}.hero p{margin:0;color:var(--muted);max-width:550px;line-height:1.7}.hero-note{background:#fff;border:1px solid var(--line);border-radius:18px;padding:15px 19px;min-width:174px}.hero-note b{font-size:25px;display:block}.hero-note span{color:var(--muted);font-size:12px}.tabs{display:flex;gap:6px;border-bottom:1px solid var(--line);margin-bottom:24px}.tab{border:0;background:transparent;color:var(--muted);padding:13px 18px;font-weight:700;border-bottom:2px solid transparent;margin-bottom:-1px}.tab.active{color:var(--green);border-color:var(--green)}.panel{display:none}.panel.active{display:block}.layout{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(270px,.85fr);gap:22px;align-items:start}.card{background:white;border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow)}.practice{padding:27px 30px 26px;min-height:400px}.card-head{display:flex;align-items:center;justify-content:space-between;gap:12px}.card-head h2{font-size:18px;margin:0;letter-spacing:-.5px}.sub{color:var(--muted);font-size:12px;margin-top:5px}.tag{padding:7px 10px;background:var(--mint);color:var(--green);border-radius:999px;font-size:11px;font-weight:700;white-space:nowrap}.controls{display:flex;gap:9px;flex-wrap:wrap;margin:23px 0 28px}.select{border:1px solid var(--line);border-radius:10px;background:#fff;padding:9px 11px;color:#46514b;font-size:12px;outline-color:var(--green)}.question{background:#f8faf6;border-radius:17px;padding:25px 24px;text-align:center;min-height:143px;display:flex;flex-direction:column;justify-content:center;position:relative}.question .q-label{font-size:11px;letter-spacing:.9px;text-transform:uppercase;color:var(--muted);font-weight:700}.question-text{font-size:32px;font-weight:600;line-height:1.5;margin:8px 0 0}.question-text.chinese{font-family:'Noto Sans SC',sans-serif}.pinyin{color:#8e9b91;font-size:15px;margin-top:3px}.q-audio{position:absolute;top:15px;right:15px;border:1px solid var(--line);background:white;border-radius:50%;width:36px;height:36px}.answer-row{display:flex;gap:10px;margin-top:18px}.answer-row input{min-width:0;flex:1;border:1px solid var(--line);border-radius:11px;padding:13px 14px;outline-color:var(--green)}.primary{border:0;background:var(--green);color:white;border-radius:11px;padding:0 19px;font-weight:700}.primary:hover{background:var(--green-dark)}.feedback{min-height:25px;padding-top:10px;font-size:13px;color:var(--muted)}.feedback.good{color:var(--green);font-weight:700}.feedback.bad{color:#bd5d48}.practice-bottom{display:flex;justify-content:space-between;gap:10px;margin-top:13px}.text-btn{border:0;background:transparent;color:var(--green);font-size:12px;font-weight:700;padding:8px 0}.secondary{border:1px solid var(--line);background:white;color:var(--ink);border-radius:10px;padding:9px 13px;font-size:12px;font-weight:700}.side{display:grid;gap:18px}.side-card{padding:21px}.side-title{font-size:14px;font-weight:800;margin:0 0 15px}.stat-line{display:flex;justify-content:space-between;align-items:center;font-size:12px;margin:12px 0;color:var(--muted)}.stat-line b{color:var(--ink)}.progress{height:7px;border-radius:99px;background:#edf0eb;overflow:hidden}.progress i{height:100%;display:block;background:var(--green);border-radius:99px;width:0;transition:width .3s}.speak-box{background:#fff8e9;border-color:#f1e8d1}.speak-box p{font-size:12px;line-height:1.6;color:#766a4a;margin:0 0 14px}.speak-actions{display:flex;align-items:center;gap:9px}.listen-btn{border:0;background:#f1d991;border-radius:11px;padding:10px 13px;font-size:12px;font-weight:700}.vocab-layout{display:grid;grid-template-columns: minmax(260px,.78fr) minmax(0,1.4fr);gap:20px;align-items:start}.form-card,.list-card{padding:24px}.form-card h2,.list-card h2{font-size:17px;margin:0 0 6px}.form-card>p,.list-card>p{font-size:12px;color:var(--muted);margin:0 0 19px}.field{display:block;margin:13px 0}.field span{display:block;font-size:11px;font-weight:700;margin-bottom:6px;color:#59645e}.field input{width:100%;border:1px solid var(--line);border-radius:10px;padding:11px 12px;outline-color:var(--green)}.full{width:100%;height:43px;margin-top:5px}.vocab-top{display:flex;justify-content:space-between;align-items:center;gap:12px}.search{max-width:190px;width:45%;border:1px solid var(--line);border-radius:10px;padding:9px 11px;outline-color:var(--green);font-size:12px}.word-list{display:grid;gap:9px;max-height:490px;overflow:auto}.word{border:1px solid var(--line);border-radius:13px;padding:12px 13px;display:flex;align-items:center;gap:12px}.word-char{width:47px;height:47px;flex-shrink:0;border-radius:12px;background:#f1f6ef;display:grid;place-items:center;font-size:22px}.word-info{flex:1;min-width:0}.word-info b{font-size:17px}.word-info small{color:var(--muted);margin-left:7px}.word-info div{font-size:12px;color:#66736b;margin-top:4px}.icon-btn{border:0;background:transparent;color:#9aa39d;padding:7px}.empty{padding:30px;text-align:center;color:var(--muted);font-size:13px}.toast{position:fixed;bottom:22px;left:50%;transform:translate(-50%,20px);background:#243b31;color:white;padding:11px 17px;border-radius:10px;font-size:13px;opacity:0;transition:.2s;pointer-events:none}.toast.show{opacity:1;transform:translate(-50%,0)}.hidden{display:none!important}.footer{text-align:center;color:#98a29b;font-size:11px;padding-top:30px}
+    @media(max-width:760px){.shell{padding:0 17px 40px}.topbar{height:70px}.hero{padding:30px 0 22px;align-items:flex-start}.hero-note{display:none}.layout,.vocab-layout{grid-template-columns:1fr}.side{grid-template-columns:1fr 1fr}.practice{padding:22px 18px;min-height:0}.question-text{font-size:27px}.tabs{overflow:auto}.tab{padding:12px 13px;white-space:nowrap}.vocab-layout{gap:14px}}
+    @media(max-width:440px){.side{grid-template-columns:1fr}.answer-row{flex-direction:column}.primary{height:44px}.question{padding:28px 15px}.practice-bottom{align-items:center}.controls{gap:6px}.select{padding:9px 7px;font-size:11px}}
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <div class="brand"><div class="brand-mark han">汉</div><div>汉语小屋<small>Góc nhỏ học tiếng Trung</small></div></div>
+      <div class="streak">✦ <span id="streakCount">0</span> câu đúng hôm nay</div>
+    </header>
+    <section class="hero">
+      <div><div class="eyebrow">Học một chút mỗi ngày</div><h1>Từ mới hôm nay,<br>tự tin ngày mai.</h1><p>Thêm từ vựng bạn vừa học, rồi luyện dịch và phát âm qua những câu được tạo từ chính bộ từ của bạn.</p></div>
+      <div class="hero-note"><b id="heroWordCount">0</b><span>từ trong sổ tay của bạn</span></div>
+    </section>
+    <nav class="tabs" aria-label="Các mục học"><button class="tab active" data-tab="practice">✦　Luyện tập</button><button class="tab" data-tab="vocabulary">▤　Sổ từ vựng</button></nav>
+    <main>
+      <section id="practice" class="panel active">
+        <div class="layout">
+          <article class="card practice">
+            <div class="card-head"><div><h2>Thử thách dịch câu</h2><div class="sub">Câu luyện tập lấy từ vựng trong sổ tay của bạn</div></div><span class="tag" id="questionNumber">Câu 1</span></div>
+            <div class="controls">
+              <select class="select" id="direction" aria-label="Chiều dịch"><option value="zh-vi">中文 → Tiếng Việt</option><option value="zh-en">中文 → English</option><option value="vi-zh">Tiếng Việt → 中文</option><option value="en-zh">English → 中文</option></select>
+              <select class="select" id="level" aria-label="Loại câu"><option value="sentence">Luyện câu</option><option value="word">Luyện từ</option></select>
+              <button class="secondary" id="togglePinyin">Ẩn pinyin</button>
+            </div>
+            <div class="question">
+              <button class="q-audio" id="playQuestion" title="Nghe phát âm" aria-label="Nghe phát âm">🔊</button>
+              <div class="q-label" id="questionLabel">Dịch câu này sang tiếng Việt</div>
+              <div class="question-text chinese" id="questionText">我今天学习了你好。</div>
+              <div class="pinyin" id="questionPinyin">Wǒ jīntiān xuéxí le nǐ hǎo.</div>
+            </div>
+            <div class="answer-row"><input id="answer" autocomplete="off" placeholder="Nhập bản dịch của bạn…"><button class="primary" id="checkAnswer">Kiểm tra　↗</button></div>
+            <div class="feedback" id="feedback" aria-live="polite">Mẹo nhỏ: bật pinyin nếu bạn cần gợi ý phát âm.</div>
+            <div class="practice-bottom"><button class="text-btn" id="showAnswer">Hiện đáp án</button><button class="secondary" id="nextQuestion">Câu tiếp theo　→</button></div>
+          </article>
+          <aside class="side">
+            <article class="card side-card"><h3 class="side-title">Tiến độ hôm nay</h3><div class="stat-line"><span>Câu đã luyện</span><b id="doneCount">0</b></div><div class="progress"><i id="progressBar"></i></div><div class="stat-line"><span>Câu trả lời đúng</span><b id="correctCount">0</b></div><div class="stat-line"><span>Tỷ lệ chính xác</span><b id="accuracy">—</b></div></article>
+            <article class="card side-card speak-box"><h3 class="side-title">🎙️ Luyện nói</h3><p>Nghe câu mẫu, sau đó nhấn ghi âm và đọc lại. Trình duyệt sẽ nhận diện giọng nói tiếng Trung và chấm độ khớp.</p><div class="speak-actions"><button class="listen-btn" id="recordButton">●　Bắt ��ầu nói</button><span id="speechStatus" class="sub">Cần cho phép microphone</span></div><div id="speechResult" class="sub" style="margin-top:11px"></div></article>
+            <article class="card side-card"><h3 class="side-title">Gợi ý học nhanh</h3><div class="sub" style="line-height:1.8">Mỗi câu được ghép theo mẫu <span class="han">我今天学习了…</span> (Hôm nay tôi đã học…). Thêm từ mới để có thêm câu luyện tập nhé.</div><button class="text-btn" id="goAddWords">＋ Thêm từ vựng</button></article>
+          </aside>
+        </div>
+      </section>
+      <section id="vocabulary" class="panel">
+        <div class="vocab-layout">
+          <article class="card form-card"><h2>Thêm từ mới</h2><p>Lưu từ bạn vừa học để dùng trong bài luyện tập.</p>
+            <form id="wordForm"><label class="field"><span>Từ tiếng Trung *</span><input id="wordChinese" required placeholder="你好" maxlength="30"></label><label class="field"><span>Pinyin *</span><input id="wordPinyin" required placeholder="nǐ hǎo" maxlength="60"></label><label class="field"><span>Nghĩa tiếng Việt *</span><input id="wordVietnamese" required placeholder="xin chào" maxlength="100"></label><label class="field"><span>Nghĩa tiếng Anh (không bắt buộc)</span><input id="wordEnglish" placeholder="hello" maxlength="100"></label><button class="primary full" type="submit">＋　Lưu từ vựng</button></form>
+          </article>
+          <article class="card list-card"><div class="vocab-top"><div><h2>Sổ tay của bạn</h2><p id="listDescription">Những từ đã lưu</p></div><input id="searchWords" class="search" placeholder="Tìm từ…" aria-label="Tìm từ"></div><div id="wordList" class="word-list"></div></article>
+        </div>
+      </section>
+    </main>
+    <div class="footer">汉语小屋 · Học từ vựng, luyện từng câu 🌱</div>
+  </div>
+  <div class="toast" id="toast"></div>
+<script>
+(() => {
+  const starterWords = [
+    { chinese:'你好', pinyin:'nǐ hǎo', vi:'xin chào', en:'hello' },
+    { chinese:'谢谢', pinyin:'xièxie', vi:'cảm ơn', en:'thank you' },
+    { chinese:'朋友', pinyin:'péngyou', vi:'bạn bè', en:'friend' },
+    { chinese:'学习', pinyin:'xuéxí', vi:'học tập', en:'study' }
+  ];
+  let words = JSON.parse(localStorage.getItem('hanyu-words') || 'null') || starterWords;
+  let done = Number(localStorage.getItem('hanyu-done') || 0), correct = Number(localStorage.getItem('hanyu-correct') || 0);
+  let todayCorrect = Number(localStorage.getItem('hanyu-today-' + new Date().toDateString()) || 0);
+  let questionIndex = 0, currentWord = words[0] || starterWords[0], pinyinVisible = true, recognizing = false;
+  const $ = id => document.getElementById(id);
+  const normalize = s => (s || '').toLocaleLowerCase().trim().replace(/[.,!?。！？，、'"“”]/g,'').replace(/\s+/g,' ');
+  function toast(msg){const el=$('toast');el.textContent=msg;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2200)}
+  function sentence(w=currentWord){return '我今天学习了' + w.chinese + '。'}
+  function pinyinSentence(w=currentWord){return 'Wǒ jīntiān xuéxí le ' + w.pinyin + '.'}
+  function translation(lang,w=currentWord,level=$('level').value){
+    const meaning=lang==='vi'?w.vi:(w.en||w.vi);
+    if(level==='word') return meaning;
+    return lang==='vi'?'Hôm nay tôi đã học từ ' + w.vi + '.':'Today I studied the word ' + (w.en||w.vi) + '.';
+  }
+  function targets(){const dir=$('direction').value, level=$('level').value; if(dir==='zh-vi')return [translation('vi'),currentWord.vi]; if(dir==='zh-en')return [translation('en'),currentWord.en||currentWord.vi]; if(dir==='vi-zh')return [level==='word'?currentWord.chinese:'Hôm nay tôi đã học từ '+currentWord.vi+'.', level==='word'?currentWord.chinese:sentence()]; return [level==='word'?(currentWord.en||currentWord.vi):'Today I studied the word '+(currentWord.en||currentWord.vi)+'.',level==='word'?currentWord.chinese:sentence()];}
+  function renderQuestion(){if(!words.length)words=starterWords;currentWord=words[questionIndex%words.length];$('questionNumber').textContent='Câu '+(questionIndex+1);const dir=$('direction').value,level=$('level').value;const chineseSource=dir.startsWith('zh');$('questionText').textContent=level==='word'?currentWord.chinese:sentence();$('questionText').classList.toggle('chinese',chineseSource);if(!chineseSource){$('questionText').textContent=dir==='vi-zh'?(level==='word'?currentWord.vi:'Hôm nay tôi đã học từ '+currentWord.vi+'.'):(level==='word'?(currentWord.en||currentWord.vi):'Today I studied the word '+(currentWord.en||currentWord.vi)+'.')}
+    $('questionPinyin').textContent=level==='word'?currentWord.pinyin:pinyinSentence();$('questionPinyin').classList.toggle('hidden',!pinyinVisible||!chineseSource);$('questionLabel').textContent=chineseSource?(dir==='zh-vi'?'Dịch sang tiếng Việt': 'Translate into English'):(dir==='vi-zh'?'Dịch sang tiếng Trung':'Translate into Chinese');$('answer').placeholder=dir.endsWith('zh')?'输入中文…':'Nhập bản dịch của bạn…';$('answer').value='';$('feedback').className='feedback';$('feedback').textContent='Mẹo nhỏ: bật pinyin nếu bạn cần gợi ý phát âm.';$('speechResult').textContent='';}
+  function updateStats(){$('doneCount').textContent=done;$('correctCount').textContent=correct;$('accuracy').textContent=done?Math.round(correct/done*100)+'%':'—';$('progressBar').style.width=Math.min(done%10*10|| (done?100:0),100)+'%';$('streakCount').textContent=todayCorrect;}
+  function save(){localStorage.setItem('hanyu-words',JSON.stringify(words));localStorage.setItem('hanyu-done',done);localStorage.setItem('hanyu-correct',correct);localStorage.setItem('hanyu-today-'+new Date().toDateString(),todayCorrect)}
+  function renderWords(){const query=normalize($('searchWords').value);const filtered=words.filter(w=>normalize(w.chinese+' '+w.pinyin+' '+w.vi+' '+w.en).includes(query));$('heroWordCount').textContent=words.length;$('listDescription').textContent=words.length+' từ đã lưu';const list=$('wordList');list.innerHTML='';if(!filtered.length){list.innerHTML='<div class="empty">'+(words.length?'Không tìm thấy từ phù hợp.':'Chưa có từ nào. Hãy thêm từ đầu tiên nhé!')+'</div>';return}filtered.forEach(w=>{const row=document.createElement('div');row.className='word';row.innerHTML='<div class="word-char han"></div><div class="word-info"><b class="han"></b><small></small><div></div></div><button class="icon-btn" title="Nghe phát âm" aria-label="Nghe phát âm">🔊</button><button class="icon-btn remove" title="Xóa từ" aria-label="Xóa từ">×</button>';row.querySelector('.word-char').textContent=w.chinese;row.querySelector('.word-info b').textContent=w.chinese;row.querySelector('.word-info small').textContent=w.pinyin;row.querySelector('.word-info div').textContent=w.vi+(w.en?' · '+w.en:'');row.querySelector('[title="Nghe phát âm"]').onclick=()=>speak(w.chinese,'zh-CN');row.querySelector('.remove').onclick=()=>{words=words.filter(x=>x!==w);save();renderWords();renderQuestion();toast('Đã xóa từ vựng')};list.appendChild(row)})}
+  function speak(text,lang){if(!('speechSynthesis'in window)){toast('Trình duyệt chưa hỗ trợ phát âm');return}speechSynthesis.cancel();const utterance=new SpeechSynthesisUtterance(text);utterance.lang=lang;utterance.rate=.85;speechSynthesis.speak(utterance)}
+  document.querySelectorAll('.tab').forEach(tab=>tab.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===tab));document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('active',p.id===tab.dataset.tab));if(tab.dataset.tab==='vocabulary')renderWords()}));
+  $('goAddWords').onclick=()=>document.querySelector('[data-tab="vocabulary"]').click();
+  $('wordForm').addEventListener('submit',e=>{e.preventDefault();const w={chinese:$('wordChinese').value.trim(),pinyin:$('wordPinyin').value.trim(),vi:$('wordVietnamese').value.trim(),en:$('wordEnglish').value.trim()};if(words.some(x=>x.chinese===w.chinese)){toast('Từ này đã có trong sổ tay');return}words.push(w);save();renderWords();questionIndex=words.length-1;renderQuestion();e.target.reset();toast('Đã lưu từ mới!')});
+  $('searchWords').addEventListener('input',renderWords);
+  $('direction').onchange=renderQuestion;$('level').onchange=renderQuestion;
+  $('togglePinyin').onclick=()=>{pinyinVisible=!pinyinVisible;$('togglePinyin').textContent=pinyinVisible?'Ẩn pinyin':'Hiện pinyin';$('questionPinyin').classList.toggle('hidden',!pinyinVisible||!$('direction').value.startsWith('zh'))};
+  $('playQuestion').onclick=()=>speak($('questionText').textContent,$('direction').value.startsWith('zh')?'zh-CN':($('direction').value==='vi-zh'?'vi-VN':'en-US'));
+  function check(){const [expected,alt]=targets(),actual=normalize($('answer').value);if(!actual){$('feedback').className='feedback bad';$('feedback').textContent='Bạn hãy nhập câu trả lời trước nhé.';return}done++;const right=actual===normalize(expected)||actual===normalize(alt);if(right){correct++;todayCorrect++;$('feedback').className='feedback good';$('feedback').textContent='Chính xác! 很好！ Cùng tiếp tục nhé 🌱'}else{$('feedback').className='feedback bad';$('feedback').textContent='Chưa khớp rồi. Đáp án: '+expected}save();updateStats()}
+  $('checkAnswer').onclick=check;$('answer').addEventListener('keydown',e=>{if(e.key==='Enter')check()});$('showAnswer').onclick=()=>{$('feedback').className='feedback';$('feedback').textContent='Đáp án: '+targets()[0]};$('nextQuestion').onclick=()=>{questionIndex++;renderQuestion()};
+  const SpeechRecognition=window.SpeechRecognition||window.webkitSpeechRecognition;
+  $('recordButton').onclick=()=>{if(!SpeechRecognition){toast('Nhận diện giọng nói chưa được hỗ trợ. Hãy thử Chrome.');return}if(recognizing)return;const recognition=new SpeechRecognition();recognition.lang='zh-CN';recognition.interimResults=false;recognition.maxAlternatives=1;recognizing=true;$('speechStatus').textContent='Đang nghe…';$('recordButton').textContent='◉　Đang nghe';recognition.onresult=e=>{const spoken=e.results[0][0].transcript;const target=$('level').value==='word'?currentWord.chinese:sentence();const clean=s=>s.replace(/[\s，。！？,.!?]/g,'');const a=clean(spoken),b=clean(target);let prev=Array.from({length:b.length+1},(_,i)=>i);for(let i=1;i<=a.length;i++){const cur=[i];for(let j=1;j<=b.length;j++)cur[j]=Math.min(cur[j-1]+1,prev[j]+1,prev[j-1]+(a[i-1]===b[j-1]?0:1));prev=cur}const score=Math.max(0,Math.round((1-prev[b.length]/Math.max(a.length,b.length,1))*100));$('speechResult').textContent='Bạn nói: '+spoken+' · Độ khớp: '+score+'%';$('speechStatus').textContent=score>=80?'Rất tốt! 🎉':'Thử đọc chậm và rõ hơn nhé';};recognition.onerror=()=>{$('speechStatus').textContent='Không nhận được giọng nói, thử lại nhé'};recognition.onend=()=>{recognizing=false;$('recordButton').textContent='●　Bắt đầu nói'};recognition.start()};
+  updateStats();renderWords();renderQuestion();
+})();
+</script>
+</body>
+</html>
