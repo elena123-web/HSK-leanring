@@ -1,16 +1,17 @@
-# 汉语小屋 — AI hội thoại theo từ vựng
+# 汉语小屋 — Học tiếng Trung cùng AI
 
-Trang `ai-dialogue.html` tạo hội thoại mới bằng AI dựa trên từ bạn đã lưu trong `index.html`. Có thể chọn chủ đề, HSK, chiều luyện Trung–Việt/Anh và luyện dịch từng câu.
+Ứng dụng học tiếng Trung nằm trên một trang duy nhất: `index.html`.
 
-## Dùng thử
+## Tính năng
 
-1. Mở `index.html` và thêm từ vựng. AI có thể dùng danh sách ở cùng trình duyệt/domain.
-2. Mở `ai-dialogue.html` trên cùng domain và trình duyệt. Khi dùng GitHub Pages, đường dẫn là `https://<tên-tài-khoản>.github.io/<tên-repo>/ai-dialogue.html`.
-3. Nhập OpenAI API key và model tương thích, chọn chủ đề/HSK/chiều dịch rồi nhấn **Sáng tác hội thoại**.
-4. Nhấn loa để nghe tiếng Trung; phần luyện phía dưới cho phép dịch từng lượt và xem đáp án.
+- Thêm, tìm kiếm và xóa từ vựng; gắn nghĩa tiếng Việt/Anh và cấp HSK 1–6.
+- Chọn chủ đề, cấp độ, số lượt và chiều dịch: Trung–Việt, Trung–Anh, Việt–Trung hoặc Anh–Trung.
+- AI sáng tác hội thoại mới từ từ vựng đã lưu; hiển thị pinyin, bản dịch và phát âm.
+- Luyện dịch từng lượt; AI đánh giá nội dung và đưa phản hồi, chấp nhận bản dịch tương đương.
+- Dữ liệu từ vựng và tiến độ được lưu trong localStorage của trình duyệt.
 
-## Bảo mật và giới hạn
+## Chạy ứng dụng
 
-- API key chỉ nằm trong bộ nhớ của tab hiện tại, không ghi vào localStorage và sẽ mất khi tải lại trang. Tuy nhiên, khi gọi API trực tiếp từ trình duyệt, key vẫn được sử dụng ở client. Chỉ dùng key cá nhân có giới hạn ngân sách/quyền; không nhúng key cố định vào mã nguồn hoặc chia sẻ trang có key.
-- Để triển khai công khai, chuyển lời gọi AI sang backend/serverless proxy có xác thực, giới hạn tốc độ và quản lý secret ở biến môi trường.
-- Sổ từ dùng `localStorage`, vì vậy dữ liệu phải mở trên cùng trình duyệt và origin. Nếu trang học chưa có từ đã lưu, hãy thêm từ trước rồi bấm **Làm mới danh sách từ**.
+Mở `index.html` trong trình duyệt hoặc chạy qua localhost/host tĩnh. Tính năng AI yêu cầu Internet và API key tương thích OpenAI; nhập key trong trang. Key chỉ giữ trong bộ nhớ của tab, nhưng gọi trực tiếp từ trình duyệt vẫn sử dụng key phía client. Với trang công khai hoặc dùng chung, hãy chuyển API call sang backend/serverless và giữ secret trong biến môi trường; không đưa key vào mã nguồn.
+
+Từ vựng nằm trong localStorage nên chỉ khả dụng trên cùng trình duyệt và origin.
