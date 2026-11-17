@@ -1,37 +1,451 @@
 <!doctype html>
 <html lang="vi">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f6f7f2"><title>汉语小屋 — Học tiếng Trung</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700&display=swap');
-:root{--ink:#202a27;--muted:#75817b;--green:#226c55;--line:#e7ebe5;--mint:#e8f2eb}*{box-sizing:border-box}body{margin:0;background:#f6f7f2;color:var(--ink);font:15px 'DM Sans',sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer}.han{font-family:'Noto Sans SC',sans-serif}.shell{max-width:1120px;margin:auto;padding:0 24px 48px}.top{height:72px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between}.brand{font-weight:800}.mark{display:inline-grid;place-items:center;background:var(--green);color:white;width:38px;height:38px;border-radius:12px;margin-right:8px}.hero{padding:27px 0}.hero h1{font-size:clamp(28px,4vw,40px);margin:7px 0;letter-spacing:-1px}.muted{color:var(--muted);font-size:13px;line-height:1.6}.tabs{display:flex;gap:6px;border-bottom:1px solid var(--line);margin:0 0 20px;overflow:auto}.tab{border:0;background:none;color:var(--muted);font-weight:700;padding:12px 14px;border-bottom:2px solid transparent;white-space:nowrap}.tab.active{color:var(--green);border-color:var(--green)}.panel{display:none}.panel.active{display:block}.grid{display:grid;grid-template-columns:1.5fr 1fr;gap:16px}.card{background:white;border:1px solid var(--line);border-radius:17px;padding:20px;box-shadow:0 8px 26px #24372b0a}.card h2{font-size:18px;margin:0 0 8px}.controls,.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:14px 0}.select,input,textarea{border:1px solid var(--line);border-radius:9px;padding:10px 11px;background:white;outline-color:var(--green)}.question{position:relative;text-align:center;padding:24px;background:#f8faf6;border-radius:13px}.q-label{font-size:11px;color:var(--muted);text-transform:uppercase}.q-text{font-size:28px;margin:8px}.q-text.chinese{font-family:'Noto Sans SC',sans-serif}.pinyin{font-size:14px;color:#859187}.answer{display:flex;gap:8px;margin-top:12px}.answer input{flex:1;min-width:0}.primary{background:var(--green);color:white;border:0;border-radius:9px;padding:11px 15px;font-weight:700}.secondary{background:white;border:1px solid var(--line);border-radius:9px;padding:9px 12px}.actions{display:flex;justify-content:space-between;margin-top:10px}.feedback{min-height:25px;padding-top:8px;font-size:13px;color:var(--muted)}.good{color:var(--green)}.bad{color:#bd5d48}.stat{display:flex;justify-content:space-between;padding:9px 0;color:var(--muted)}.bar{height:7px;background:#edf0eb;border-radius:8px}.bar i{display:block;height:100%;background:var(--green)}.field{margin:11px 0}.field label{display:block;font-weight:700;font-size:12px;margin-bottom:5px}.field input,.field select{width:100%}.import{width:100%;min-height:130px;resize:vertical}.word{display:flex;gap:10px;align-items:center;border:1px solid var(--line);border-radius:10px;padding:10px;margin-top:8px}.wordtext{flex:1}.word small{color:var(--muted)}.dialogue{padding:12px 0;border-bottom:1px solid var(--line)}.dialogue b{font-size:18px;display:block}.dialogue small{color:var(--muted)}.quizchoices{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}.choice{text-align:left;padding:13px;border:1px solid var(--line);border-radius:9px;background:white}.choice:disabled{cursor:default}.warning{background:#fff8e9;padding:12px;border-radius:10px;margin:10px 0;font-size:12px;line-height:1.6;color:#766a4a}.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#243b31;color:white;padding:11px 15px;border-radius:9px;display:none}.toast.show{display:block}
-@media(max-width:700px){.shell{padding:0 14px 32px}.grid{grid-template-columns:1fr}.answer{flex-direction:column}.quizchoices{grid-template-columns:1fr}.card{padding:16px}}
-</style>
-<!-- Inline navigation stays functional even if an unrelated feature script has an error. -->
-<script>
-document.addEventListener('click',function(e){const b=e.target.closest('[data-panel]');if(!b)return;e.preventDefault();document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('.panel').forEach(x=>x.classList.toggle('active',x.id===b.dataset.panel));if(b.dataset.panel==='quiz'&&window.renderDailyQuiz)window.renderDailyQuiz();});
-</script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f6f7f2">
+  <title>汉语小屋 — Hỗ trợ dịch tiếng Anh & pinyin</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700&display=swap');
+    :root {
+      --ink: #202a27;
+      --muted: #75817b;
+      --green: #226c55;
+      --line: #e7ebe5;
+      --mint: #e8f2eb;
+      --bg: #f6f7f2;
+      --white: #fff;
+      --warning: #fff7dd;
+      --bad: #f9e5e1;
+      --good: #e7f5eb;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; background:var(--bg); color:var(--ink);
+      font: 15px 'DM Sans', sans-serif;
+    }
+    .shell{max-width:1120px; margin:0 auto; padding:0 24px 48px}
+    .top{
+      height:72px; border-bottom:1px solid var(--line);
+      display:flex; align-items:center; justify-content:space-between;
+    }
+    .brand{font-weight:800; display:flex; align-items:center; gap:8px}
+    .mark{
+      display:inline-grid; place-items:center; width:38px; height:38px;
+      border-radius:12px; background:var(--green); color:#fff; font-size:22px;
+      font-family:'Noto Sans SC', sans-serif;
+    }
+    .muted{color:var(--muted)}
+    .hero{padding:28px 0 10px}
+    .eyebrow{
+      color:var(--green); font-size:12px; letter-spacing:0.14em; text-transform:uppercase;
+      font-weight:700; margin-bottom:12px;
+    }
+    h1{
+      font-size: clamp(28px, 4vw, 42px); line-height:1.15; margin:8px 0 12px;
+      letter-spacing:-0.04em;
+    }
+    .hero p{ font-size:18px; max-width:760px; color:var(--muted); margin:0; }
+    .tabs{
+      display:flex; gap:6px; flex-wrap:wrap; margin:24px 0 20px; border-bottom:1px solid var(--line);
+      padding-bottom:8px;
+    }
+    .tab{
+      background:none; border:0; color:var(--muted); font-weight:700; padding:12px 16px;
+      border-bottom:2px solid transparent; cursor:pointer; border-radius:8px 8px 0 0;
+    }
+    .tab.active{ color:var(--green); border-color:var(--green); }
+    .panel{display:none}
+    .panel.active{display:block}
+    .grid{display:grid; grid-template-columns:1.5fr .9fr; gap:16px}
+    .card{
+      background:#fff; border:1px solid var(--line); border-radius:18px; padding:20px;
+      box-shadow:0 8px 26px rgba(36,55,46,0.03);
+    }
+    .card h2{ margin-top:0; margin-bottom:12px; font-size:18px; }
+    .controls, .row, .actions, .answer-row{display:flex; gap:8px; align-items:center; flex-wrap:wrap}
+    .controls{margin-bottom:18px}
+    select, input, button, textarea{
+      font:inherit; border-radius:10px; border:1px solid var(--line); background:#fff;
+    }
+    select, input, textarea{padding:10px 12px; min-height:42px; color:var(--ink)}
+    button{
+      cursor:pointer; padding:10px 16px; border:1px solid var(--line); background:#fff;
+      font-weight:700; color:var(--ink); transition: .2s ease;
+    }
+    button:hover{ transform:translateY(-1px); }
+    .primary{ background:var(--green); border-color:var(--green); color:#fff; }
+    .secondary{ background:#f4f7f4; }
+    .question{padding:18px 0 12px}
+    .q-label{font-size:12px; text-transform:uppercase; letter-spacing:.1em; color:var(--muted); margin-bottom:10px}
+    #prompt{
+      font-family:'Noto Sans SC', sans-serif; font-size: clamp(28px, 5vw, 48px);
+      line-height:1.2; margin-bottom:10px; letter-spacing:0.02em;
+    }
+    .pinyin{
+      min-height:22px; font-size:16px; color:#85918a; font-weight:600;
+    }
+    .answer-row{margin-top:10px}
+    .answer-row input{flex:1; min-width:200px}
+    .feedback{
+      min-height:44px; display:flex; align-items:center; margin-top:14px; border-radius:12px;
+      padding:12px 14px; font-weight:600; background:#f8f9f7; color:var(--ink);
+    }
+    .feedback.good{ background:var(--good); color:var(--green); }
+    .feedback.bad{ background:var(--bad); color:#9d3b2b; }
+    .stat{ display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid var(--line); }
+    .stat:last-child{border-bottom:0}
+    .stat b{font-size:20px}
+    .example{
+      margin-top:18px; padding:12px 14px; border-radius:12px; background:var(--mint);
+      color:var(--green); font-weight:600;
+    }
+    .textarea{ width:100%; min-height:120px; resize:vertical; }
+    .toast{
+      position:fixed; left:50%; bottom:20px; transform:translateX(-50%) translateY(20px);
+      background:rgba(32,42,39,.95); color:#fff; padding:10px 18px; border-radius:12px;
+      opacity:0; transition:.25s ease; pointer-events:none;
+    }
+    .toast.show{opacity:1; transform:translateX(-50%) translateY(0)}
+    @media (max-width:700px){
+      .shell{padding:0 14px 32px}
+      .grid{grid-template-columns:1fr}
+      .tabs{overflow:auto; white-space:nowrap}
+      .top{height:auto; padding:14px 0}
+      .brand{font-size:14px}
+    }
+  </style>
 </head>
-<body><div class="shell">
-<header class="top"><div class="brand"><span class="mark han">汉</span>汉语小屋 <span class="muted">· Góc học tiếng Trung</span></div><div class="muted">✦ <b id="todayScore">0</b> câu đúng hôm nay</div></header>
-<section class="hero"><div class="muted">HỌC TỪ VỰNG · LUYỆN DỊCH · HỘI THOẠI AI</div><h1>Từ vựng của bạn,<br>thành bài học của bạn.</h1><p class="muted">Luyện từ theo HSK, làm quiz hằng ngày và luyện dịch hội thoại do AI tạo.</p></section>
-<nav class="tabs" aria-label="Các mục học"><button type="button" class="tab active" data-panel="practice">✦ Luyện từ</button><button type="button" class="tab" data-panel="ai">✧ Luyện dịch AI</button><button type="button" class="tab" data-panel="quiz">◷ Quiz mỗi ngày</button><button type="button" class="tab" data-panel="vocab">▤ Từ vựng</button></nav>
-<main>
-<section id="practice" class="panel active"><div class="grid"><article class="card"><h2>Luyện dịch từ</h2><div class="controls"><select class="select" id="hskFilter"><option value="all">Tất cả HSK</option><option>HSK 1</option><option>HSK 2</option><option>HSK 3</option><option>HSK 4</option><option>HSK 5</option><option>HSK 6</option></select><select class="select" id="direction"><option value="zh-vi">中文 → Tiếng Việt</option><option value="zh-en">中文 → English</option><option value="vi-zh">Tiếng Việt → 中文</option></select><button class="secondary" id="pinToggle" type="button">Ẩn pinyin</button></div><div class="question"><div class="q-label" id="qLabel"></div><div class="q-text" id="prompt"></div><div class="pinyin" id="pin"></div></div><div class="answer"><input id="answer" placeholder="Nhập câu trả lời"><button class="primary" id="check">Kiểm tra</button></div><div id="feedback" class="feedback"></div><div class="actions"><button class="secondary" id="show">Hiện đáp án</button><button class="secondary" id="next">Từ tiếp theo →</button></div></article><aside class="card"><h2>Tiến độ</h2><div class="stat"><span>Đã luyện</span><b id="done">0</b></div><div class="bar"><i id="progress" style="width:0"></i></div><div class="stat"><span>Đúng</span><b id="correct">0</b></div><div class="stat"><span>Chính xác</span><b id="accuracy">—</b></div></aside></div></section>
-<section id="ai" class="panel"><div class="grid"><article class="card"><h2>Luyện dịch AI</h2><p class="muted">AI tạo hội thoại mới từ từ vựng bạn đã lưu. Chọn câu bất kỳ để dịch và nhận nhận xét/chấm điểm.</p><div class="controls"><label class="muted">HSK <select id="aiHsk" class="select"><option>HSK 1</option><option>HSK 2</option><option>HSK 3</option><option>HSK 4</option><option>HSK 5</option><option>HSK 6</option></select></label><label class="muted">Chủ đề <select id="topic" class="select"><option>Gặp gỡ và chào hỏi</option><option>Ở quán ăn</option><option>Trường học</option><option>Du lịch</option><option>Cuộc sống hằng ngày</option></select></label><label class="muted">Số lượt <select id="turns" class="select"><option>4</option><option selected>6</option><option>8</option></select></label><label class="muted">Dịch sang <select id="aiTarget" class="select"><option value="vi">Tiếng Việt</option><option value="en">English</option></select></label></div><div class="field"><label for="apiKey">OpenAI API key</label><input id="apiKey" type="password" autocomplete="off" placeholder="Chỉ nhập nếu bạn có API key" style="width:100%"></div><div class="warning">AI tạo hội thoại và chấm câu trả lời cần OpenAI API key, Internet và tài khoản API có quyền truy cập model. Key chỉ nằm trong bộ nhớ của trang, nhưng được gửi trực tiếp từ trình duyệt tới OpenAI. Không dùng trên thiết bị dùng chung; website công khai nên dùng backend để bảo vệ key.</div><div class="row"><button id="generate" class="primary">Tạo hội thoại AI</button><span id="aiStatus" class="muted"></span></div><div id="dialogue"></div></article><aside class="card"><h2>Dịch từng lượt</h2><p class="muted">Chọn “Luyện dịch” dưới một câu trong hội thoại, nhập bản dịch rồi bấm chấm bằng AI.</p><div id="aiPractice" class="muted">Tạo hội thoại trước để bắt đầu.</div></aside></div></section>
-<section id="quiz" class="panel"><article class="card" style="max-width:720px;margin:auto"><div id="quizContent"></div></article></section>
-<section id="vocab" class="panel"><div class="grid"><article class="card"><h2>Nhập từ hàng loạt</h2><p class="muted">Mỗi dòng: 中文 [Tab] nghĩa, hoặc 中文 [Tab] pinyin [Tab] nghĩa. Nghĩa trống sẽ được dịch tự động.</p><textarea id="importText" class="import" placeholder="你好&#9;xin chào&#10;谢谢&#9;xièxie&#9;cảm ơn"></textarea><div class="controls"><label class="muted">Dịch sang <select id="targetLang" class="select"><option value="vi">Tiếng Việt</option><option value="en">English</option></select></label><label class="muted">HSK <select id="importHsk" class="select"><option>HSK 1</option><option>HSK 2</option><option>HSK 3</option><option>HSK 4</option><option>HSK 5</option><option>HSK 6</option></select></label></div><button id="importBtn" class="primary">Nhập danh sách</button> <span id="importStatus" class="muted"></span><hr><h2>Thêm một từ</h2><div class="field"><label>中文</label><input id="oneChinese" placeholder="你好"></div><div class="field"><label>Pinyin (không bắt buộc)</label><input id="onePinyin" placeholder="nǐ hǎo"></div><button id="addOne" class="primary">Tìm nghĩa và lưu</button><div id="oneStatus" class="muted"></div></article><article class="card"><h2>Sổ tay <span id="wordCount" class="muted"></span></h2><input id="search" placeholder="Tìm từ…" style="width:100%"><div id="wordList"></div></article></div></section>
-</main></div><div id="toast" class="toast"></div>
-<script>
-(()=>{
-const starter=[{chinese:'你好',pinyin:'nǐ hǎo',vi:'xin chào',en:'hello',hsk:'HSK 1'},{chinese:'谢谢',pinyin:'xièxie',vi:'cảm ơn',en:'thank you',hsk:'HSK 1'},{chinese:'朋友',pinyin:'péngyou',vi:'bạn bè',en:'friend',hsk:'HSK 1'},{chinese:'学习',pinyin:'xuéxí',vi:'học tập',en:'study',hsk:'HSK 1'},{chinese:'今天',pinyin:'jīntiān',vi:'hôm nay',en:'today',hsk:'HSK 2'}];let words;try{words=JSON.parse(localStorage.getItem('hanyu-words')||'null')}catch{}if(!Array.isArray(words)||!words.length)words=starter;words=words.map(w=>({...w,hsk:w.hsk||'HSK 1'}));let idx=0,done=Number(localStorage.getItem('hanyu-done')||0),correct=Number(localStorage.getItem('hanyu-correct')||0),pin=true,dialogue=null;
-const $=id=>document.getElementById(id),today=()=>new Date().toISOString().slice(0,10),norm=s=>(s||'').trim().toLowerCase().replace(/[.,!?。！？，、]/g,'').replace(/\s+/g,' ');function save(){localStorage.setItem('hanyu-words',JSON.stringify(words));localStorage.setItem('hanyu-done',done);localStorage.setItem('hanyu-correct',correct)}function current(){const p=$('hskFilter').value==='all'?words:words.filter(w=>w.hsk===$('hskFilter').value);return p.length?p[idx%p.length]:words[0]||starter[0]}function render(){const w=current(),d=$('direction').value,zh=d==='zh-vi'||d==='zh-en';$('prompt').textContent=zh?w.chinese:d==='vi-zh'?w.vi:(w.en||w.vi);$('prompt').classList.toggle('chinese',zh);$('qLabel').textContent=zh?'Dịch nghĩa':'Dịch sang tiếng Trung';$('pin').textContent=w.pinyin||'';$('pin').style.display=zh&&pin?'block':'none';$('answer').value=''}function stats(){$('done').textContent=done;$('correct').textContent=correct;$('accuracy').textContent=done?Math.round(correct/done*100)+'%':'—';$('progress').style.width=(done%10?done%10*10:done?100:0)+'%';$('todayScore').textContent=localStorage.getItem('hanyu-today-'+today())||'0'}function add(w){if(words.some(x=>x.chinese===w.chinese))return false;words.push(w);save();renderWords();render();return true}function renderWords(){const q=norm($('search').value);$('wordCount').textContent=words.length+' từ';$('wordList').replaceChildren();words.filter(w=>norm([w.chinese,w.pinyin,w.vi,w.en,w.hsk].join(' ')).includes(q)).forEach(w=>{const el=document.createElement('div');el.className='word';const text=document.createElement('div');text.className='wordtext';text.innerHTML='<b class="han"></b><br><small></small>';text.querySelector('b').textContent=w.chinese;text.querySelector('small').textContent=[w.pinyin,w.vi||w.en,w.hsk].filter(Boolean).join(' · ');const del=document.createElement('button');del.className='secondary';del.textContent='×';del.onclick=()=>{words=words.filter(x=>x!==w);save();renderWords();render()};el.append(text,del);$('wordList').append(el)})}async function translate(text,lang){const r=await fetch('https://api.mymemory.translated.net/get?q='+encodeURIComponent(text)+'&langpair='+encodeURIComponent('zh-CN|'+lang));const j=await r.json();if(!r.ok||!j.responseData?.translatedText)throw Error('Không lấy được nghĩa tự động');return j.responseData.translatedText}
-$('hskFilter').onchange=render;$('direction').onchange=render;$('next').onclick=()=>{idx++;render()};$('pinToggle').onclick=()=>{pin=!pin;render()};$('show').onclick=()=>{const w=current(),d=$('direction').value;$('feedback').textContent=d==='zh-vi'?w.vi:d==='zh-en'?w.en||w.vi:w.chinese};$('check').onclick=()=>{const w=current(),d=$('direction').value,answer=norm($('answer').value),expected=d==='zh-vi'?w.vi:d==='zh-en'?w.en||w.vi:w.chinese;if(!answer)return;$('feedback').className='feedback '+(answer===norm(expected)?'good':'bad');$('feedback').textContent=answer===norm(expected)?'Chính xác! 很好！':'Đáp án: '+expected;done++;if(answer===norm(expected)){correct++;const k='hanyu-today-'+today();localStorage.setItem(k,Number(localStorage.getItem(k)||0)+1)}save();stats()};$('search').oninput=renderWords;
-$('importBtn').onclick=async()=>{const lines=$('importText').value.split(/\r?\n/).filter(x=>x.trim());if(!lines.length)return;$('importBtn').disabled=true;let count=0,failed=[];for(let i=0;i<lines.length;i++){const c=lines[i].split('\t').map(x=>x.trim());let py='',meaning='';if(c.length>=3){py=c[1];meaning=c.slice(2).join(' ')}else if(c.length===2)meaning=c[1];try{if(!meaning)meaning=await translate(c[0],$('targetLang').value);if(add({chinese:c[0],pinyin:py,vi:$('targetLang').value==='vi'?meaning:'',en:$('targetLang').value==='en'?meaning:'',hsk:$('importHsk').value}))count++}catch{failed.push(c[0])}}$('importBtn').disabled=false;$('importStatus').textContent='Đã nhập '+count+'; lỗi dịch: '+failed.length};$('addOne').onclick=async()=>{const ch=$('oneChinese').value.trim();if(!ch)return;$('oneStatus').textContent='Đang dịch…';try{const m=await translate(ch,$('targetLang').value);add({chinese:ch,pinyin:$('onePinyin').value,hsk:$('importHsk').value,vi:$('targetLang').value==='vi'?m:'',en:$('targetLang').value==='en'?m:''});$('oneStatus').textContent=m}catch(e){$('oneStatus').textContent=e.message}};
-async function callAI(system,user){const key=$('apiKey').value.trim();if(!key)throw Error('Nhập OpenAI API key để dùng AI.');const r=await fetch('https://api.openai.com/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+key},body:JSON.stringify({model:'gpt-4o-mini',temperature:.6,messages:[{role:'system',content:system},{role:'user',content:user}]})});const j=await r.json();if(!r.ok)throw Error(j.error?.message||'Lỗi gọi OpenAI');return j.choices?.[0]?.message?.content||''}
-$('generate').onclick=async()=>{const vocab=words.filter(w=>w.hsk===$('aiHsk').value);if(!vocab.length){$('aiStatus').textContent='Chưa có từ thuộc cấp độ này.';return}$('generate').disabled=true;$('aiStatus').textContent='AI đang tạo hội thoại…';try{const raw=await callAI('You are a Mandarin teacher. Return only JSON: {"title":"...","turns":[{"speaker":"A","chinese":"...","pinyin":"...","vi":"...","en":"..."}]}. Make exactly '+$('turns').value+' natural beginner-level turns and accurate translations.','Write a coherent Chinese dialogue about '+$('topic').value+' using some of these words: '+JSON.stringify(vocab)+'.');dialogue=JSON.parse(raw.replace(/^```json\s*/i,'').replace(/```$/,''));renderDialogue();$('aiStatus').textContent='Đã tạo hội thoại.'}catch(e){$('aiStatus').textContent=e.message}finally{$('generate').disabled=false}};
-function renderDialogue(){$('dialogue').replaceChildren();(dialogue.turns||[]).forEach((t,i)=>{const row=document.createElement('div');row.className='dialogue';const b=document.createElement('b');b.className='han';b.textContent=(t.speaker||'A')+': '+t.chinese;const small=document.createElement('small');small.textContent=t.pinyin||'';const btn=document.createElement('button');btn.className='secondary';btn.textContent='Luyện dịch';btn.onclick=()=>renderTurn(i);row.append(b,small,document.createElement('br'),btn);$('dialogue').append(row)})}function renderTurn(i){const t=dialogue.turns[i],lang=$('aiTarget').value;const area=$('aiPractice');area.innerHTML='<div class="question"><div class="q-label">Dịch câu này</div><div class="q-text han"></div><div class="pinyin"></div></div><div class="answer"><input id="aiAnswer" placeholder="Nhập bản dịch"><button class="primary" id="grade">AI chấm</button></div><div class="feedback" id="gradeResult"></div>';area.querySelector('.q-text').textContent=t.chinese;area.querySelector('.pinyin').textContent=t.pinyin||'';$('grade').onclick=async()=>{const a=$('aiAnswer').value.trim();if(!a)return; $('grade').disabled=true;$('gradeResult').textContent='Đang chấm…';try{$('gradeResult').textContent=await callAI('Evaluate Chinese translation into '+(lang==='vi'?'Vietnamese':'English')+'. Be kind and concise. Give a score /100, assess meaning and naturalness, explain mistakes in Vietnamese and provide an improved translation.','Chinese: '+t.chinese+'; reference: '+(lang==='vi'?t.vi:t.en)+'; learner answer: '+a)}catch(e){$('gradeResult').textContent=e.message}finally{$('grade').disabled=false}}}
-window.renderDailyQuiz=()=>{const level=$('hskFilter').value==='all'?'HSK 1':$('hskFilter').value,p=words.filter(w=>w.hsk===level),key='hanyu-quiz-'+today()+'-'+level;let q;try{q=JSON.parse(localStorage.getItem(key)||'null')}catch{}if(!p.length){$('quizContent').textContent='Chưa có từ ở '+level;return}if(!q||q.ids.some(id=>!p.some(w=>w.chinese===id)))q={ids:p.slice(0,Math.min(5,p.length)).map(w=>w.chinese),i:0,score:0};if(q.i>=q.ids.length){$('quizContent').textContent='Hoàn thành quiz hôm nay! Đúng '+q.score+'/'+q.ids.length;return}const w=p.find(x=>x.chinese===q.ids[q.i]),options=[w,...p.filter(x=>x!==w).slice(0,3)];$('quizContent').innerHTML='<h2>Quiz mỗi ngày · '+level+'</h2><p>Câu '+(q.i+1)+'/'+q.ids.length+'</p><div class="question"><div class="q-text han"></div><div class="pinyin"></div></div><div class="quizchoices"></div><div class="feedback" id="quizFeedback"></div><button class="primary" id="quizNext" disabled>Tiếp theo</button>';document.querySelector('#quizContent .q-text').textContent=w.chinese;document.querySelector('#quizContent .pinyin').textContent=w.pinyin||'';options.forEach(o=>{const b=document.createElement('button');b.className='choice';b.textContent=o.vi||o.en||'—';b.onclick=()=>{document.querySelectorAll('.choice').forEach(x=>x.disabled=true);const ok=o===w;if(ok)q.score++;$('quizFeedback').textContent=ok?'Chính xác!':'Đáp án: '+(w.vi||w.en);$('quizNext').disabled=false;localStorage.setItem(key,JSON.stringify(q))};document.querySelector('.quizchoices').append(b)});$('quizNext').onclick=()=>{q.i++;localStorage.setItem(key,JSON.stringify(q));window.renderDailyQuiz()};localStorage.setItem(key,JSON.stringify(q))};
-renderWords();render();stats();
-})();
-</script></body></html>
+<body>
+  <div class="shell">
+    <header class="top">
+      <div class="brand"><span class="mark han">汉</span> 汉语小屋 <span class="muted">· Học tiếng Trung</span></div>
+      <div class="muted">✦ <b id="todayScore">0</b> điểm hôm nay</div>
+    </header>
+
+    <section class="hero">
+      <div class="eyebrow">Học từ vựng · Dịch đúng nghĩa · Pinyin tự động</div>
+      <h1>Hỗ trợ dịch sang tiếng Anh, chấm theo đúng nghĩa và tự động thêm pinyin.</h1>
+      <p>Không cần dịch sát từng chữ. Nếu nghĩa đã đúng, hệ thống vẫn chấp nhận. Tự động hiển thị pinyin để luyện đọc và ghi nhớ dễ hơn.</p>
+    </section>
+
+    <nav class="tabs" aria-label="Các mục học">
+      <button type="button" class="tab active" data-panel="practice">✦ Luyện từ</button>
+      <button type="button" class="tab" data-panel="ai">✧ Luyện dịch AI</button>
+      <button type="button" class="tab" data-panel="vocab">✩ Nhập từ</button>
+    </nav>
+
+    <main>
+      <section id="practice" class="panel active">
+        <div class="grid">
+          <article class="card">
+            <h2>Luyện dịch từ</h2>
+            <div class="controls">
+              <select id="hskFilter">
+                <option value="all">Tất cả HSK</option>
+                <option>HSK 1</option>
+                <option>HSK 2</option>
+                <option>HSK 3</option>
+                <option>HSK 4</option>
+                <option>HSK 5</option>
+                <option>HSK 6</option>
+              </select>
+
+              <select id="direction">
+                <option value="zh-vi">Trung → Việt</option>
+                <option value="zh-en">Trung → Anh</option>
+              </select>
+
+              <button id="pinToggle" class="secondary" type="button">Bật pinyin</button>
+            </div>
+
+            <div class="question">
+              <div class="q-label" id="qLabel">Dịch sang tiếng Việt</div>
+              <div id="prompt" class="han">你好</div>
+              <div id="pinyin" class="pinyin">nǐ hǎo</div>
+            </div>
+
+            <div class="answer-row">
+              <input id="answer" type="text" placeholder="Nhập nghĩa tiếng Việt...">
+              <button id="check" class="primary" type="button">Kiểm tra</button>
+            </div>
+
+            <div id="feedback" class="feedback">Hàng ngày chúng tôi chấm theo đúng nghĩa, không cần dịch nguyên văn.</div>
+
+            <div class="actions" style="margin-top:14px;">
+              <button id="show" class="secondary" type="button">Hiện đáp án</button>
+              <button id="next" class="secondary" type="button">Câu tiếp</button>
+            </div>
+          </article>
+
+          <aside class="card">
+            <h2>Thống kê</h2>
+            <div class="stat"><span>Đã làm</span><b id="done">0</b></div>
+            <div class="stat"><span>Đúng</span><b id="correct">0</b></div>
+            <div class="stat"><span>Độ chính xác</span><b id="accuracy">0%</b></div>
+            <div class="example">Mẹo: nếu nghĩa đúng nhưng câu khác một chút, hệ thống vẫn chấp nhận.</div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="ai" class="panel">
+        <div class="grid">
+          <article class="card">
+            <h2>Luyện dịch AI</h2>
+            <p class="muted">Tính năng mới hỗ trợ dịch sang tiếng Anh và chấm theo đúng ý nghĩa. Nếu câu dịch không giống y nguyên câu mẫu nhưng vẫn diễn đạt đúng, hệ thống sẽ ghi nhận là đúng.</p>
+            <div class="example">Ví dụ: “xin chào” được chấp nhận cho “hello”, và “nói chuyện” có thể chấm đúng nếu nghĩa phù hợp.</div>
+          </article>
+
+          <article class="card">
+            <h2>Chức năng nổi bật</h2>
+            <ul>
+              <li>Hỗ trợ dịch Trung → Việt và Trung → Anh</li>
+              <li>Chấm theo nghĩa, không bắt buộc ghép chữ sát</li>
+              <li>Tự động thêm pinyin khi hiển thị từ mới</li>
+              <li>Phù hợp để luyện HSK / giao tiếp hàng ngày</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="vocab" class="panel">
+        <div class="grid">
+          <article class="card">
+            <h2>Nhập từ hàng loạt</h2>
+            <p class="muted">Mỗi dòng: 中文 [Tab] nghĩa, hoặc 中文 [Tab] pinyin [Tab] nghĩa</p>
+            <textarea id="importText" class="textarea" placeholder="你好	xin chào
+谢谢	xièxie	cảm ơn"></textarea>
+            <div class="actions" style="margin-top:12px;">
+              <select id="targetLang">
+                <option value="vi">Tiếng Việt</option>
+                <option value="en">Tiếng Anh</option>
+              </select>
+              <select id="importHsk">
+                <option>HSK 1</option>
+                <option>HSK 2</option>
+                <option>HSK 3</option>
+                <option>HSK 4</option>
+                <option>HSK 5</option>
+                <option>HSK 6</option>
+              </select>
+              <button id="importBtn" class="primary" type="button">Nhập dữ liệu</button>
+            </div>
+            <div id="importStatus" class="muted" style="margin-top:10px; min-height:22px;"></div>
+          </article>
+
+          <article class="card">
+            <h2>Danh sách từ</h2>
+            <input id="search" type="text" placeholder="Tìm từ hoặc nghĩa..." style="width:100%">
+            <div id="wordList" style="margin-top:12px; display:grid; gap:8px;"></div>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script>
+    const words = [
+      { chinese: '你好', pinyin: 'nǐ hǎo', vi: 'xin chào', en: 'hello', hsk: 'HSK 1' },
+      { chinese: '谢谢', pinyin: 'xièxie', vi: 'cảm ơn', en: 'thank you', hsk: 'HSK 1' },
+      { chinese: '朋友', pinyin: 'péngyou', vi: 'bạn bè', en: 'friend', hsk: 'HSK 1' },
+      { chinese: '学习', pinyin: 'xuéxí', vi: 'học tập', en: 'study', hsk: 'HSK 2' },
+      { chinese: '工作', pinyin: 'gōngzuò', vi: 'làm việc', en: 'work', hsk: 'HSK 2' },
+      { chinese: '时间', pinyin: 'shíjiān', vi: 'thời gian', en: 'time', hsk: 'HSK 2' },
+      { chinese: '问题', pinyin: 'wèntí', vi: 'vấn đề', en: 'question/problem', hsk: 'HSK 3' },
+      { chinese: '环境', pinyin: 'huánjìng', vi: 'môi trường', en: 'environment', hsk: 'HSK 3' },
+      { chinese: '意思', pinyin: 'yìsi', vi: 'ý nghĩa', en: 'meaning', hsk: 'HSK 4' },
+      { chinese: '文化', pinyin: 'wénhuà', vi: 'văn hóa', en: 'culture', hsk: 'HSK 4' },
+      { chinese: '机会', pinyin: 'jīhuì', vi: 'cơ hội', en: 'opportunity', hsk: 'HSK 5' },
+      { chinese: '表达', pinyin: 'biǎodá', vi: 'diễn đạt', en: 'express', hsk: 'HSK 5' }
+    ];
+
+    const $ = (id) => document.getElementById(id);
+    const state = { idx: 0, pin: true, done: 0, correct: 0 };
+
+    const normalize = (s) => (s || '')
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[.,!?;:()\[\]"'“”]/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+
+    const isApproxMatch = (answer, expected) => {
+      const a = normalize(answer);
+      const b = normalize(expected);
+      if (!a || !b) return false;
+      if (a === b) return true;
+      const aTokens = a.split(' ').filter(Boolean);
+      const bTokens = b.split(' ').filter(Boolean);
+      if (!aTokens.length || !bTokens.length) return false;
+      const overlap = aTokens.filter(t => b.includes(t)).length;
+      const overlap2 = bTokens.filter(t => a.includes(t)).length;
+      const ratio = Math.max(overlap / aTokens.length, overlap2 / bTokens.length);
+      return ratio >= 0.6 || a.includes(b) || b.includes(a);
+    };
+
+    function currentWords() {
+      const level = $('hskFilter').value;
+      return level === 'all' ? words : words.filter(w => w.hsk === level);
+    }
+
+    function currentWord() {
+      const pool = currentWords();
+      if (!pool.length) return words[0];
+      if (state.idx >= pool.length) state.idx = 0;
+      return pool[state.idx];
+    }
+
+    function updateStats() {
+      const total = state.done || 1;
+      const rate = Math.round((state.correct / total) * 100);
+      $('done').textContent = String(state.done);
+      $('correct').textContent = String(state.correct);
+      $('accuracy').textContent = `${rate}%`;
+      $('todayScore').textContent = String(state.correct * 10);
+    }
+
+    function render() {
+      const word = currentWord();
+      const dir = $('direction').value;
+      $('prompt').textContent = word.chinese;
+      $('pinyin').textContent = state.pin ? word.pinyin : '';
+      $('qLabel').textContent = dir === 'zh-vi' ? 'Dịch sang tiếng Việt' : 'Dịch sang tiếng Anh';
+      $('answer').placeholder = dir === 'zh-vi' ? 'Nhập nghĩa tiếng Việt...' : 'Nhập nghĩa tiếng Anh...';
+      $('answer').value = '';
+      $('feedback').textContent = 'Hàng ngày chúng tôi chấm theo đúng nghĩa, không cần dịch nguyên văn.';
+      $('feedback').className = 'feedback';
+      $('answer').focus();
+    }
+
+    function showToast(msg) {
+      const t = $('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 1800);
+    }
+
+    function checkAnswer() {
+      const word = currentWord();
+      const dir = $('direction').value;
+      const expected = dir === 'zh-vi' ? word.vi : word.en;
+      const user = $('answer').value.trim();
+      if (!user) {
+        $('feedback').textContent = 'Bạn chưa nhập câu trả lời.';
+        $('feedback').className = 'feedback bad';
+        return;
+      }
+
+      const acceptable = isApproxMatch(user, expected) || (dir === 'zh-en' && isApproxMatch(user, word.vi));
+      state.done += 1;
+      if (acceptable) {
+        state.correct += 1;
+        $('feedback').textContent = `Đúng! “${word.chinese}” có nghĩa là “${expected}”. Nghĩa đã đúng, không cần dịch y nguyên từng chữ.`;
+        $('feedback').className = 'feedback good';
+        showToast('Đúng nghĩa!');
+      } else {
+        $('feedback').textContent = `Sai rồi. Đáp án đúng: “${expected}”. (Nghĩa đúng là ${dir === 'zh-vi' ? 'tiếng Việt' : 'tiếng Anh'}).`;
+        $('feedback').className = 'feedback bad';
+        showToast('Chưa đúng nghĩa');
+      }
+      updateStats();
+    }
+
+    function showAnswer() {
+      const word = currentWord();
+      const dir = $('direction').value;
+      const answer = dir === 'zh-vi' ? word.vi : word.en;
+      $('answer').value = answer;
+      $('feedback').textContent = `Đáp án đúng: “${answer}”.`;
+      $('feedback').className = 'feedback good';
+    }
+
+    function nextWord() {
+      const pool = currentWords();
+      if (!pool.length) return;
+      state.idx = (state.idx + 1) % pool.length;
+      render();
+    }
+
+    function renderWordList() {
+      const search = normalize($('search').value);
+      const list = words.filter(w => {
+        if (!search) return true;
+        return [w.chinese, w.pinyin, w.vi, w.en, w.hsk].some(v => normalize(v).includes(search));
+      });
+
+      $('wordList').innerHTML = '';
+      list.slice(0, 12).forEach(w => {
+        const row = document.createElement('div');
+        row.style.border = '1px solid var(--line)';
+        row.style.borderRadius = '10px';
+        row.style.padding = '10px 12px';
+        row.style.display = 'flex';
+        row.style.justifyContent = 'space-between';
+        row.style.alignItems = 'center';
+        row.innerHTML = `<div><strong>${w.chinese}</strong> <span class="muted">${w.pinyin}</span></div><div class="muted">${w.vi} / ${w.en}</div>`;
+        $('wordList').appendChild(row);
+      });
+    }
+
+    function importWords() {
+      const text = $('importText').value;
+      const lines = text.split(/\r?\n/).filter(Boolean);
+      if (!lines.length) {
+        $('importStatus').textContent = 'Chưa có dữ liệu để nhập.';
+        return;
+      }
+
+      const count = lines.length;
+      let added = 0;
+      lines.forEach(line => {
+        const parts = line.split(/\t/).map(v => v.trim()).filter(Boolean);
+        if (!parts.length) return;
+        const chinese = parts[0];
+        const pinyin = parts[1] && !parts[1].includes(' ') && parts.length === 2 ? '' : (parts[1] || '');
+        const meaning = parts.length >= 3 ? parts[parts.length - 1] : (parts[1] || '');
+        const targetLang = $('targetLang').value;
+        const entry = {
+          chinese,
+          pinyin: pinyin || chinese,
+          vi: targetLang === 'vi' ? meaning : '',
+          en: targetLang === 'en' ? meaning : '',
+          hsk: $('importHsk').value
+        };
+        if (!words.some(w => w.chinese === chinese)) {
+          words.push(entry);
+          added += 1;
+        }
+      });
+
+      $('importStatus').textContent = `Đã nhập ${added} từ mới trong ${count} dòng.`;
+      renderWordList();
+      render();
+    }
+
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(x => x.classList.toggle('active', x === tab));
+        document.querySelectorAll('.panel').forEach(panel => panel.classList.toggle('active', panel.id === tab.dataset.panel));
+      });
+    });
+
+    $('hskFilter').addEventListener('change', () => { state.idx = 0; render(); });
+    $('direction').addEventListener('change', render);
+    $('pinToggle').addEventListener('click', () => { state.pin = !state.pin; $('pinToggle').textContent = state.pin ? 'Bật pinyin' : 'Tắt pinyin'; render(); });
+    $('check').addEventListener('click', checkAnswer);
+    $('show').addEventListener('click', showAnswer);
+    $('next').addEventListener('click', () => { nextWord(); });
+    $('answer').addEventListener('keydown', (e) => { if (e.key === 'Enter') checkAnswer(); });
+    $('search').addEventListener('input', renderWordList);
+    $('importBtn').addEventListener('click', importWords);
+
+    $('pinToggle').textContent = 'Bật pinyin';
+    renderWordList();
+    render();
+    updateStats();
+  </script>
+</body>
+</html>
